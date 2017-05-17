@@ -37,12 +37,19 @@ if nargout > 2
     stdint = StDev(2);
 end
 
-% % Graphic Patlak
-% figure(1)
-% plot(X(:,1)./Cp(N-nrpoints+1:N),Y./Cp(N-nrpoints+1:N),'or')
-% hold on
-% plot(X(:,1)./Cp(N-nrpoints+1:N),(P(1)*X(:,1)./Cp(N-nrpoints+1:N) + P(2)),'.-b')
-% hold off
+% Graphic Patlak
+figure(1)
+plot(X(:,1)./Cp(N-nrpoints+1:N),Y./Cp(N-nrpoints+1:N),'or')
+hold on
+plot(X(:,1)./Cp(N-nrpoints+1:N),(P(1)*X(:,1)./Cp(N-nrpoints+1:N) + P(2)),'.-b')
+hold off
+
+% Graphic Patlak modeied
+figure(2)
+plot(X(:,1),Y,'or')
+hold on
+plot(X(:,1),X(:,1) + P(2)),'.-b')
+hold off
    
     
     
