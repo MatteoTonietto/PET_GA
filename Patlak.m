@@ -20,11 +20,12 @@ function [Ki,stdKi,int,stdint] = Patlak(TAC,time_TAC,Cp,Cpint,weights,nrpoints)
 %__________________________________________________________________________
 % Matteo Tonietto
 
-N = length(time_TAC);
+N   = length(time_TAC);
+idx = N - nrpoints + 1 : N;
 
-X = [Cpint(N-nrpoints+1:N)./Cp(N-nrpoints+1:N) ones(1,nrpoints)];
-Y = TAC(N-nrpoints+1:N)./Cp(N-nrpoints+1:N);
-W = diag(1./weights(N-nrpoints+1 : N).^2);
+X = [Cpint(idx)./Cp(idx) ones(nrpoints,1)];
+Y = TAC(idx)./Cp(idx);
+W = diag(1./weights(idx).^2);
 
 % estimated_par, estimated_standev, gamma (or sigmaq), covariance matrix
 [P,StDev] = lscov(X,Y,W);

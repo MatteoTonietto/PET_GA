@@ -20,11 +20,12 @@ function [Ki,stdKi,int,stdint] = Patlak_modified(TAC,time_TAC,Cp,Cpint,weights,n
 %__________________________________________________________________________
 % Matteo Tonietto
 
-N = length(time_TAC);
+N   = length(time_TAC);
+idx = N - nrpoints + 1 : N;
 
-X = [Cpint(N-nrpoints+1:N) Cp(N-nrpoints+1:N)];
-Y = TAC(N-nrpoints+1:N);
-W = diag(1./weights(N-nrpoints+1 : N).^2);
+X = [Cpint(idx) Cp(idx)];
+Y = TAC(idx);
+W = diag(1./weights(idx).^2);
 
 % estimated_par, estimated_standev, gamma (or sigmaq), covariance matrix
 [P,StDev] = lscov(X,Y,W);
@@ -39,9 +40,9 @@ end
 
 % % Graphic Patlak
 % figure(1)
-% plot(X(:,1)./Cp(N-nrpoints+1:N),Y./Cp(N-nrpoints+1:N),'or')
+% plot(X(:,1)./Cp(idx),Y./Cp(idx),'or')
 % hold on
-% plot(X(:,1)./Cp(N-nrpoints+1:N),(P(1)*X(:,1)./Cp(N-nrpoints+1:N) + P(2)),'.-b')
+% plot(X(:,1)./Cp(idx),(P(1)*X(:,1)./Cp(idx) + P(2)),'.-b')
 % hold off
    
     
