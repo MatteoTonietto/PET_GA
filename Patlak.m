@@ -1,10 +1,10 @@
-function [Ki,stdKi,int,stdint] = Patlak(TAC,time_TAC,Cp,Cpint,weights,nrpoints)
+function [Ki,stdKi,int,stdint] = Patlak(TAC,time_PET,Cp,Cpint,weights,nrpoints)
 % Patlack graphical method
 %
 % Expects
 %--------------------------------------------------------------------------
 % TAC                       % tissue TAC
-% time_TAC                  % time of TAC
+% time_PET                  % time of TAC
 % Cp                        % input function at times time_TAC
 % Cpint                     % cumulative integral of Cp at times time_TAC
 % weights                   % weight defined as 1./SD
@@ -20,7 +20,7 @@ function [Ki,stdKi,int,stdint] = Patlak(TAC,time_TAC,Cp,Cpint,weights,nrpoints)
 %__________________________________________________________________________
 % Matteo Tonietto
 
-N   = length(time_TAC);
+N   = length(time_PET);
 idx = N - nrpoints + 1 : N;
 
 X = [Cpint(idx)./Cp(idx) ones(nrpoints,1)];
